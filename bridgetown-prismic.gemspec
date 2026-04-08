@@ -15,13 +15,13 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r!^test/!)
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 3.0"
+  spec.required_ruby_version = ">= 4.0"
 
-  spec.add_dependency "bridgetown", ">= 1.2.0", "< 2.0"
-  spec.add_dependency "prismic.io", ">= 1.8"
-  spec.add_dependency "async", ">= 1.30", "< 2.0"
+  spec.add_dependency "bridgetown", "~> 2.1"
+  spec.add_dependency "prismic.io", "~> 1.8"
+  spec.add_dependency "async", "~> 2.0"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake", ">= 13.0"
-  spec.add_development_dependency "rubocop-bridgetown", "~> 0.3"
+  spec.add_development_dependency "rubocop-bridgetown", "~> 0.7"
 end
