@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-04-09
+- Updated to Bridgetown 2.1 and Prismic.io 1.8
+
 ## [1.0.1] - 2023-06-09
 
 - Use updated method signature for origin initializer
