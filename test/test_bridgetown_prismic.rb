@@ -8,7 +8,8 @@ class TestBridgetownPrismic < Bridgetown::TestCase
       "root_dir"    => root_dir,
       "source"      => source_dir,
       "destination" => dest_dir,
-      "quiet"       => true
+      "quiet"       => true,
+      "config"      => root_dir("bridgetown.config.yml")
     )
     @config.run_initializers! context: :static
     @site = Bridgetown::Site.new(@config)

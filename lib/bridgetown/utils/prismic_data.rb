@@ -2,7 +2,7 @@
 
 module Bridgetown
   module Utils
-    class PrismicData < RubyFrontMatter
+    class PrismicData < Bridgetown::FrontMatter::RubyFrontMatter
       def with_links = Bridgetown::Current.site.config.prismic_link_resolver
 
       def provide_data(&block)

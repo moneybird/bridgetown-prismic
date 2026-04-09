@@ -12,8 +12,8 @@ module BridgetownPrismic
     def self.import_document(document) = new("prismic://#{document.type}/#{document.id}",
                                              document).read
 
-    def initialize(id, prismic_document = nil, site: Bridgetown::Current.site)
-      super(id, site: site)
+    def initialize(id, prismic_document = nil, site: Bridgetown::Current.site, bare_text: false)
+      super(id, site: site, bare_text: bare_text)
       @relative_path = Pathname.new("#{id.delete_prefix("prismic://")}.html")
       @prismic_document = prismic_document # could be nil, so model should load preview instance
     end
