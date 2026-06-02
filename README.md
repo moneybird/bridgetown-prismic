@@ -8,7 +8,7 @@ The [Bridgetown](https://edge.bridgetownrb.com) Prismic plugin allows you to pul
 
 In addition, this plugin allows you to set up draft previews so you can see how your content will look before it's published and deployed as a static site. This will require you to host a preview site on a platform which supports Ruby Rack-based applications. We recommend [Render](https://render.com), but you can use Heroku or most other platforms which support Ruby (Rails, etc.).
 
-This plugin requires Ruby 3 and the latest alpha version of [Bridgetown 1.0](https://edge.bridgetownrb.com).
+This plugin requires Ruby 3+ and [Bridgetown 2.1](https://www.bridgetownrb.com) or later.
 
 ## Installation
 
@@ -36,25 +36,39 @@ to the top of the file, and then adding:
 include BridgetownPrismic::Roda::Previews
 ```
 
-right underneath `class RodaApp < Bridgetown::Rack::Roda`.
-
-Also ensure you have the Bridgetown SSR plugin installed (aka `plugin :bridgetown_ssr` is somewhere above your `route do |r|` block).
+right underneath `class RodaApp < Roda`.
 
 Your file should end up looking something like this:
 
 ```ruby
 require "bridgetown-prismic/roda/previews"
 
-class RodaApp < Bridgetown::Rack::Roda
+class RodaApp < Roda
   include BridgetownPrismic::Roda::Previews
 
-  plugin :bridgetown_ssr
+  plugin :bridgetown_server
 
   route do |r|
     r.bridgetown
   end
 end
 ```
+
+You'll also need the Bridgetown SSR plugin enabled, which is what provides the
+`bridgetown_site` helper the preview routes rely on. As of Bridgetown 2.x this is
+no longer loaded directly in `roda_app.rb` — instead, enable it via an initializer.
+Open `config/initializers.rb` and make sure `init :ssr` is present (uncomment it,
+as it ships commented out by default) inside the `Bridgetown.configure` block:
+
+```ruby
+Bridgetown.configure do |config|
+  # ...
+  init :ssr
+end
+```
+
+Without `init :ssr`, the preview routes will raise
+`undefined local variable or method 'bridgetown_site'`.
 
 Next, create a `server/routes/preview.rb` route file:
 
